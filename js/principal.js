@@ -40,5 +40,49 @@ for (var i = 0; i < pacientes.length; i++) {
     }
 }
 
+var botaoAdicionar = document.querySelector("#adicionar-paciente");
 
+/* Podemos utilizar uma função nomeada ou anonima */
+botaoAdicionar.addEventListener("click", adicionaPaciente);
 
+function adicionaPaciente(event) {
+    /* Evita o comportamento padrão do botão de recarregar a página e limpar os campos ao enviar o formulário*/
+    event.preventDefault();
+    
+    /* Resgata informações do formulário */
+    var form = document.querySelector("#form-adiciona");
+
+    var nome = form.nome.value;
+    var peso = form.peso.value;
+    var altura = form.altura.value;
+    var gordura = form.gordura.value;
+
+    var imc = peso / (altura * altura);
+
+    /* Criando novos elementos */
+    var pacienteTr = document.createElement("tr");
+    
+    var nomeTd = document.createElement("td");
+    var pesoTd = document.createElement("td");
+    var alturaTd = document.createElement("td");
+    var gorduraTd = document.createElement("td");
+    var imcTd = document.createElement("td");
+
+    /* Preenchendo com conteúdo */
+    nomeTd.textContent = nome;
+    pesoTd.textContent = peso;
+    alturaTd.textContent = altura;
+    gorduraTd.textContent = gordura;
+    imcTd.textContent = imc.toFixed(2);
+
+    /* Colocando as Td's dentro da Tr */
+    pacienteTr.appendChild(nomeTd);
+    pacienteTr.appendChild(pesoTd);
+    pacienteTr.appendChild(alturaTd);
+    pacienteTr.appendChild(gorduraTd);
+    pacienteTr.appendChild(imcTd);
+
+    /* Colocando a Tr dentro da tabela */
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
