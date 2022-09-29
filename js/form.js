@@ -13,9 +13,6 @@ function adicionaPaciente(event) {
     /* Recebendo Objeto Paciente */
     var paciente = obtemPacienteDoFormulario(form);
 
-    /* Criando Tr e Td's */
-    var pacienteTr = montaTr(paciente);
-
     var erro = validaPaciente(paciente);
 
     if (erro.length > 0) {
@@ -24,9 +21,7 @@ function adicionaPaciente(event) {
         return; // Sai da função
     }
 
-    /* Colocando a Tr dentro da tabela */
-    var tabela = document.querySelector("#tabela-pacientes");
-    tabela.appendChild(pacienteTr);
+    adicionaPacienteNaTabela(paciente);
 
     /* Limpa o formulario */
     form.reset();
@@ -34,6 +29,15 @@ function adicionaPaciente(event) {
     /* Limpa erros após adicionar paciente */
     var mensagensErro = document.querySelector("#mensagens-erro");
     mensagensErro.innerHTML = "";
+}
+
+function adicionaPacienteNaTabela(paciente) {
+    /* Criando Tr e Td's */
+    var pacienteTr = montaTr(paciente);
+
+    /* Colocando a Tr dentro da tabela */
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
 }
 
 /* Resgata informações do formulário */
